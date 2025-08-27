@@ -1,5 +1,5 @@
 
-# CSMarketAPI-Client
+# CSMarketAPI Client
 
 Asynchronous Python client for [CSMarketAPI](https://csmarketapi.com) — typed responses (Pydantic), enums for marketplaces/currencies, and convenient async context managers.
 
@@ -15,7 +15,7 @@ Asynchronous Python client for [CSMarketAPI](https://csmarketapi.com) — typed 
 ## Installation
 
 ```bash
-pip install csmarketapi-client
+pip install csmarketapi
 ```
 
 ---
