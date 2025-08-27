@@ -107,7 +107,7 @@ async def test_get_steam_inventory(env):
 
         assert (
             await client.get_steam_inventory(steam_id=os.getenv("STEAM_ID"))
-        ).steamid is not None
+        ).steam_id is not None
 
 
 @pytest.mark.asyncio
