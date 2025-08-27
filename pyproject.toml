@@ -1,5 +1,5 @@
 [project]
-name = "csmarketapi-client"
+name = "csmarketapi"
 version = "1.0.1"
 description = "API client for CSMarketAPI"
 readme = "README.md"
