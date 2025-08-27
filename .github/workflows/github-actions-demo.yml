@@ -11,6 +11,7 @@ jobs:
           enable-cache: true
 
       - name: Install the project
+        working-dir: .
         run: uv sync --frozen
 
       - name: Run PyTest
