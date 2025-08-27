@@ -19,17 +19,14 @@ from models import (
 
 
 class CSMarketAPI:
-    client: httpx.AsyncClient = None
-
     def __init__(self, api_key: str):
-        if CSMarketAPI.client is None:
-            CSMarketAPI.client = httpx.AsyncClient(
-                base_url="https://api.csmarketapi.com",
-                params={
-                    "key": api_key,
-                },
-                follow_redirects=True,
-            )
+        self.client = httpx.AsyncClient(
+            base_url="https://api.csmarketapi.com",
+            params={
+                "key": api_key,
+            },
+            follow_redirects=True,
+        )
 
     async def __aenter__(self) -> Self:
         return self
@@ -43,8 +40,8 @@ class CSMarketAPI:
         await self.close()
 
     async def close(self) -> None:
-        await CSMarketAPI.client.aclose()
-        CSMarketAPI.client = None
+        await self.client.aclose()
+        self.client = None
 
     async def get_listings_latest_aggregated(
         self,
@@ -53,7 +50,7 @@ class CSMarketAPI:
         currency: Currency = Currency.USD,
         max_age: str | None = None,
     ) -> ListingsLatestAggregated:
-        r = await CSMarketAPI.client.get(
+        r = await self.client.get(
             "/v1/listings/latest/aggregate",
             params={
                 "market_hash_name": market_hash_name,
@@ -72,7 +69,7 @@ class CSMarketAPI:
         currency: Currency = Currency.USD,
         max_age: str | None = None,
     ) -> ListingsHistoryAggregated:
-        r = await CSMarketAPI.client.get(
+        r = await self.client.get(
             "/v1/listings/history/aggregate",
             params={
                 "market_hash_name": market_hash_name,
@@ -90,7 +87,7 @@ class CSMarketAPI:
         markets: list[Market],
         currency: Currency = Currency.USD,
     ) -> SalesLatestAggregated:
-        r = await CSMarketAPI.client.get(
+        r = await self.client.get(
             "/v1/sales/latest/aggregate",
             params={
                 "market_hash_name": market_hash_name,
@@ -109,7 +106,7 @@ class CSMarketAPI:
         end: str | None = None,
         currency: Currency = Currency.USD,
     ) -> SalesHistoryAggregated:
-        r = await CSMarketAPI.client.get(
+        r = await self.client.get(
             "/v1/sales/history/aggregate",
             params={
                 "market_hash_name": market_hash_name,
@@ -124,17 +121,17 @@ class CSMarketAPI:
         return SalesHistoryAggregated(items=r.json())
 
     async def get_items(self) -> Items:
-        r = await CSMarketAPI.client.get("/v1/items")
+        r = await self.client.get("/v1/items")
         r.raise_for_status()
         return Items(items=r.json())
 
     async def get_currency_rates(self) -> CurrencyRates:
-        r = await CSMarketAPI.client.get("/v1/currency_rates")
+        r = await self.client.get("/v1/currency_rates")
         r.raise_for_status()
         return CurrencyRates(items=r.json())
 
     async def get_player_counts_latest(self) -> PlayerCountsLatest:
-        r = await CSMarketAPI.client.get("/v1/player_counts/latest")
+        r = await self.client.get("/v1/player_counts/latest")
         r.raise_for_status()
         return PlayerCountsLatest(**r.json())
 
@@ -143,7 +140,7 @@ class CSMarketAPI:
         start: str | None = None,
         end: str | None = None,
     ) -> PlayerCountsHistory:
-        r = await CSMarketAPI.client.get(
+        r = await self.client.get(
             "/v1/player_counts/history",
             params={
                 **({"start": start} if start is not None else {}),
@@ -154,7 +151,7 @@ class CSMarketAPI:
         return PlayerCountsHistory(items=r.json())
 
     async def get_steam_profile(self, steam_id: str) -> SteamProfile:
-        r = await CSMarketAPI.client.get(
+        r = await self.client.get(
             "/v1/steam/profile",
             params={
                 "steam_id": steam_id,
@@ -164,7 +161,7 @@ class CSMarketAPI:
         return SteamProfile(data=r.json())
 
     async def get_steam_inventory(self, steam_id: str) -> SteamInventory:
-        r = await CSMarketAPI.client.get(
+        r = await self.client.get(
             "/v1/steam/inventory",
             params={
                 "steam_id": steam_id,
@@ -174,7 +171,7 @@ class CSMarketAPI:
         return SteamInventory(**r.json())
 
     async def get_steam_friendslist(self, steam_id: str) -> SteamFriendslist:
-        r = await CSMarketAPI.client.get(
+        r = await self.client.get(
             "/v1/steam/friendslist",
             params={
                 "steam_id": steam_id,
@@ -184,7 +181,7 @@ class CSMarketAPI:
         return SteamFriendslist(data=r.json())
 
     async def get_float_info(self, inspect_link: str) -> FloatInfo:
-        r = await CSMarketAPI.client.get(
+        r = await self.client.get(
             "/v1/float",
             params={
                 "inspect_link": inspect_link,
