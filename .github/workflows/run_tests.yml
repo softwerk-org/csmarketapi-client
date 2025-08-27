@@ -18,5 +18,7 @@ jobs:
         run: uv sync --frozen
 
       - name: Run PyTest
+        env:
+          PYTHONPATH = ./src
         run: uv run pytest
         continue-on-error: false
