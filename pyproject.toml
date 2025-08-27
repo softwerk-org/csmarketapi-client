@@ -1,7 +1,7 @@
 [project]
 name = "csmarketapi"
 version = "1.0.3"
-description = "API client for CSMarketAPI"
+description = "The official python library for CSMarketAPI"
 readme = "README.md"
 authors = [{ name = "Luis", email = "luis@softwerk.ai" }]
 requires-python = ">=3.12"
