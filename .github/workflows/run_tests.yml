@@ -1,0 +1,32 @@
+name: run_tests
+run-name: Testing API client
+on: [push]
+jobs:
+  Test:
+    runs-on: ubuntu-latest
+    environment: dev
+    steps:
+      - name: Checkout 
+        uses: actions/checkout@v4
+
+      - name: Echo Env
+        run: echo ${{ secrets.API_KEY}}
+    
+      - name: Install uv
+        uses: astral-sh/setup-uv@v6
+        with:
+          enable-cache: true
+
+      - name: Install the project
+        working-directory: ./
+        run: uv sync --frozen
+
+      - name: Run PyTest
+        run: uv run pytest
+        env:
+          PYTHONPATH: ./src/csmarketapi
+          API_KEY: ${{ env.API_KEY }}
+          STEAM_ID: ${{ env.STEAM_ID }}
+          MARKET_HASH_NAME: ${{ env.MARKET_HASH_NAME }}
+          INSPECT_LINK: ${{ env.INSPECT_LINK }}
+        continue-on-error: false
