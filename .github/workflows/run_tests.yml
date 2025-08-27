@@ -25,4 +25,8 @@ jobs:
         run: uv run pytest
         env:
           PYTHONPATH: ./src/csmarketapi
+          API_KEY: ${{secrets.API_KEY}}
+          STEAM_ID: ${{secrets.STEAM_ID}}
+          MARKET_HASH_NAME: ${{secrets.MARKET_HASH_NAME}}
+          INSPECT_LINK: ${{INSPECT_LINK}}
         continue-on-error: false
