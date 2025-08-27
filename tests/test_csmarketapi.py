@@ -2,9 +2,9 @@ import os
 
 import dotenv
 import pytest
-from enums import Market
 
 from csmarketapi import CSMarketAPI
+from csmarketapi.enums import Market
 
 
 @pytest.fixture(scope="module")

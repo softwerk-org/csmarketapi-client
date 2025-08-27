@@ -1,8 +1,9 @@
 import datetime
 from typing import Any
 
-from enums import Market
 from pydantic import BaseModel
+
+from .enums import Market
 
 
 class ListingsLatestAggregated(BaseModel):

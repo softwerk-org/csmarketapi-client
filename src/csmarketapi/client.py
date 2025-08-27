@@ -1,8 +1,9 @@
 from typing import Self
 
 import httpx
-from enums import Currency, Market
-from models import (
+
+from .enums import Currency, Market
+from .models import (
     CurrencyRates,
     FloatInfo,
     Items,
