@@ -1,4 +1,4 @@
-name: Tests
+name: run_tests
 run-name: Testing API client
 on: [push]
 jobs:
