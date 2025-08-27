@@ -18,7 +18,7 @@ jobs:
         run: uv sync --frozen
 
       - name: Run PyTest
+        env:
+          PYTHONPATH: ./src/csmarketapi
         run: uv run pytest
         continue-on-error: false
-        env:
-          PYTHONPATH = './src/csmarketapi'
