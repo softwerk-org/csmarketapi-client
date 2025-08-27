@@ -19,6 +19,6 @@ jobs:
 
       - name: Run PyTest
         env:
-          PYTHONPATH = ./src
+          PYTHONPATH = ./src/marketapi
         run: uv run pytest
         continue-on-error: false
