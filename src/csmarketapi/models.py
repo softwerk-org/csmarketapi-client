@@ -164,3 +164,15 @@ class FloatInfo(BaseModel):
     url: str | None = None
     iteminfo: dict | None = None
     status: Any | None = None
+
+
+class Markets(BaseModel):
+    class Market(BaseModel):
+        id: str
+        name: str
+        display_name: str
+        url: str | None = None
+        active: bool
+        description: str | None = None
+
+    items: list[Market]

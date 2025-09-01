@@ -9,6 +9,7 @@ from .models import (
     Items,
     ListingsHistoryAggregated,
     ListingsLatestAggregated,
+    Markets,
     PlayerCountsHistory,
     PlayerCountsLatest,
     SalesHistoryAggregated,
@@ -125,6 +126,11 @@ class CSMarketAPI:
         r = await self.client.get("/v1/items")
         r.raise_for_status()
         return Items(items=r.json())
+
+    async def get_markets(self) -> Markets:
+        r = await self.client.get("/v1/markets")
+        r.raise_for_status()
+        return Markets(items=r.json())
 
     async def get_currency_rates(self) -> CurrencyRates:
         r = await self.client.get("/v1/currency_rates")
