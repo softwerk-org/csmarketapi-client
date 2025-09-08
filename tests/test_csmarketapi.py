@@ -124,3 +124,10 @@ async def test_get_float_info(env):
     async with CSMarketAPI(os.getenv("API_KEY")) as client:
 
         await client.get_float_info(inspect_link=os.getenv("INSPECT_LINK"))
+
+
+@pytest.mark.asyncio
+async def test_get_markets(env):
+    async with CSMarketAPI(os.getenv("API_KEY")) as client:
+
+        assert (await client.get_markets()).items is not None
