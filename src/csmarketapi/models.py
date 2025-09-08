@@ -167,12 +167,26 @@ class FloatInfo(BaseModel):
 
 
 class Markets(BaseModel):
+    class Trustpilot(BaseModel):
+        rating: float
+        reviews: int
+        link: str
+
+    class Fees(BaseModel):
+        deposit: float
+        buyer: float
+        seller: float
+        withdrawal: float
+
     class Market(BaseModel):
-        id: str
-        name: str
-        display_name: str
-        url: str | None = None
-        active: bool
-        description: str | None = None
+        market: str
+        url: str
+        description: str
+        type: str
+        country: str
+        icon: str
+        trustpilot: "Markets.Trustpilot"
+        fees: "Markets.Fees"
+        updated_at: datetime.datetime
 
     items: list[Market]
