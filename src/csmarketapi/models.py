@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 import datetime
 from typing import Any
 
@@ -168,25 +170,29 @@ class FloatInfo(BaseModel):
 
 class Markets(BaseModel):
     class Trustpilot(BaseModel):
-        rating: float
-        reviews: int
-        link: str
+        rating: float | None = None
+        reviews: int | None = None
+        link: str | None = None
+
+    class FeeRange(BaseModel):
+        min: float | None = None
+        max: float | None = None
 
     class Fees(BaseModel):
-        deposit: float
-        buyer: float
-        seller: float
-        withdrawal: float
+        deposit: float | Markets.FeeRange | None = None
+        buyer: float | Markets.FeeRange | None = None
+        seller: float | Markets.FeeRange | None = None
+        withdrawal: float | Markets.FeeRange | None = None
 
     class Market(BaseModel):
         market: str
         url: str
-        description: str
-        type: str
-        country: str
-        icon: str
-        trustpilot: "Markets.Trustpilot"
-        fees: "Markets.Fees"
-        updated_at: datetime.datetime
+        description: str | None = None
+        type: str | None = None
+        country: str | None = None
+        icon: str | None = None
+        trustpilot: Markets.Trustpilot | None = None
+        fees: Markets.Fees | None = None
+        updated_at: datetime.datetime | None = None
 
     items: list[Market]

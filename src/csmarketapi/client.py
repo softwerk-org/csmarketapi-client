@@ -1,5 +1,3 @@
-from typing import Self
-
 import httpx
 
 from .enums import Currency, Market
@@ -30,7 +28,7 @@ class CSMarketAPI:
             follow_redirects=True,
         )
 
-    async def __aenter__(self) -> Self:
+    async def __aenter__(self) -> "CSMarketAPI":
         return self
 
     async def __aexit__(
